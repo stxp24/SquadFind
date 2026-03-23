@@ -73,3 +73,17 @@ and builds. Spring Security and JWT are in charge of handling authentication and
 hashing, as well as token based auth. PostgreSQL is the database of choice due to its robustness
 and prominence in industry. React with Typescript ensures a smooth user experience through the UI
 as well as having strong type safety. Git will be the tool for version control.
+## 6) Database Schema
+![UML Domain Diagram of MVP](SquadFindDBSchema.drawio.png)
+Pictured above is the database schema that will be constructed utilizing PostgreSQL. Primary keys are
+denoted with an asterisk before the name of the column. Foreign keys are denoted with FK written after the 
+columns data type. What these foreign keys reference is written on the arrow that connects one table to another.
+The DB schema is completely derived from the domain model. An update to the overall design was done with this
+schema, adding a created_at column for the user table. This is not currently reflected in the domain diagram, but 
+will eventually be updated.
+### Database Tables
+- Users
+- UserPlatform (refs. Users user_id)
+- UserGame (refs. Users user_id & Game game_id)
+- Game
+- FriendRequest (refs. Users user_id)
