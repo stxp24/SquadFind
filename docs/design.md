@@ -87,3 +87,4 @@ will eventually be updated.
 - UserGame (refs. Users user_id & Game game_id)
 - Game
 - FriendRequest (refs. Users user_id)
+## 7) API Endpoints
