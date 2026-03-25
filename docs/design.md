@@ -87,4 +87,36 @@ will eventually be updated.
 - UserGame (refs. Users user_id & Game game_id)
 - Game
 - FriendRequest (refs. Users user_id)
-## 7) API Endpoints
+## 7) Overall Design Architecture
+This project utilizes the Controller-Service-Repository design architecture. This was chosen due to the patterns
+excellent ability to allow for separation of concerns, allowing code to be more maintainable, readable, scalable, and
+testable. HTTP requests are handled through the Controller layer (e.g. UserController), which are then routed to 
+the Service layer, which handles the business logic operations of the application. The Service layer manipulates the 
+data that is present in the database, which the Repository layer is responsible for communicating with, and data is 
+persisted throughout sessions.
+## 8) API Endpoints
+### Format: Method | Path | Description | Request Body | Response
+#### Authentication
+POST | /api/auth/register | Registers new user | username, email, password, birthday | 201, userId
+POST | api/auth/login | Logs a user in | username, password | 200, JWT token
+#### User Profile
+GET | /api/users/{id} | Gets a users profile | N/A | 200, user object
+PUT | /api/users/{id} | Updates a users profile | bio | 200, updated user
+DELETE | /api/users/{id} | Deletes a users profile | N/A | 204 
+#### User Platform
+POST | /api/users/{id}/platforms | add a platform and gamertag | platform, gamertag | 201, userPlatformId
+DELETE | /api/users/{id}/platforms | delete a platform | platform | 204
+#### User Games
+POST | /api/users/{id}/games | add a game to a users profile | gameId, role, skill, playstyle | 201, userGameId
+PUT | /api/users/{id}/games/{userGameId} | update role, skill, playstyle info | gameId, role, skill, playstyle | 200, updated game info
+DELETE | /api/users/{id}games/{userGameId} | deletes game and game info from user | N/A | 204
+#### Discover Players
+GET | /api/discover | get users based on logged in users games and platforms | N/A | 200, list of users
+GET | /api/discover/search?game=X&platform=Y&role=Z | get users based on search criteria | N/A| 200, list of users
+#### Friend Requests
+POST | /api/friends/request | send a friend request | userId (sent by), userId (sent to), timestamp | 201, requestId
+PUT | /api/friends/request/{requestId}/accept | accept a friend request | requestId | 200, updated friendRequest object
+PUT | /api/friends/request/{requestId}/decline | decline a friend request | requestId | 200, updated friendRequest object
+GET | /api/friends/request/incoming | view incoming friend requests | N/A | 200, list of requests
+GET | /api/friends/request/outgoing | view outgoing friend requests | N/A | 200, list of requests
+GET | /api/friends | view users connected friends | N/A | 200, list of users
