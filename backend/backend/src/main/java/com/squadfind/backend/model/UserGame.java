@@ -4,6 +4,7 @@ import com.squadfind.backend.enums.PlayStyle;
 import com.squadfind.backend.enums.Role;
 import com.squadfind.backend.enums.SkillLevel;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Table(name = "UserGame")
 public class UserGame {
     @Id
-    @Setter
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
