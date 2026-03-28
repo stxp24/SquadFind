@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "UserGame")
+@Table(name = "user_game")
 public class UserGame {
     @Id
     @Setter(AccessLevel.NONE)

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor // Sets no arg constructor that is necessary for JPA
 @Getter // Creates getters for all variables in User
 @Setter // Creates setters for all variables in User
-@Table(name = "Users") // Sets table name for User class
+@Table(name = "users") // Sets table name for User class
 public class User {
     @Id // Sets userId as primary id for User table
     @Setter(AccessLevel.NONE) // Ensures that a setter is not created for userId since it should not be changed
