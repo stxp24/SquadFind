@@ -30,11 +30,11 @@ public class UserGame {
     private PlayStyle playStyle;
 
     @ManyToOne // Sets the relationship between tables, many UserGames can belong to one User
-    @JoinColumn(name = "user_id") // Joins the foreign key with 'name user_id' to the variable with the @Id annotation
+    @JoinColumn(name = "user_id", nullable = false) // Joins the foreign key with 'name user_id' to the variable with the @Id annotation
     private User user; // Instantiates a private User variable that lets the application know what entity is being referenced
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
     public UserGame(Role role, SkillLevel skillLevel, PlayStyle playStyle, User user, Game game){
