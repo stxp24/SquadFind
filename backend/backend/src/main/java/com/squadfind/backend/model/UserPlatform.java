@@ -23,6 +23,7 @@ public class UserPlatform {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(unique = true, nullable = false)
     private String gamertag;
 
     public UserPlatform(Platform platform, String gamertag, User user){
