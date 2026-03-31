@@ -36,6 +36,7 @@ public class UserService {
         String email = request.getEmail();
         LocalDate birthday = request.getBirthday();
         String bio = "";
+
         return userRepo.save(new User(squadFindUsername, birthday, email, password, bio));
 
     }
@@ -48,7 +49,6 @@ public class UserService {
     information from the request.
     */
     public User updateUser(Long userId, UserUpdateRequest request){
-        //TODO: add validation logic
         User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         if (request.getSquadFindUsername() != null ) {
