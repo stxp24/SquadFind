@@ -74,9 +74,4 @@ public class UserGameService {
         return userGameRepo.findById(userGameId).orElseThrow(() -> new RuntimeException("Game not found in users profile"));
     }
 
-
-
-
-
-
 }
