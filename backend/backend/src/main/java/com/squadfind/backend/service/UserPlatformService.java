@@ -10,6 +10,8 @@ import com.squadfind.backend.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Transactional // Needed since multiple database calls are made
 @Service
 public class UserPlatformService {
@@ -56,5 +58,10 @@ public class UserPlatformService {
 
     public UserPlatform getUserPlatform(Long userPlatformId){
         return userPlatformRepo.findById(userPlatformId).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    // Get all all platforms for a user
+    public List<UserPlatform> getUserPlatforms(Long userId){
+        return userPlatformRepo.findByUserId(userId);
     }
 }
