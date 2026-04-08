@@ -4,8 +4,6 @@ import com.squadfind.backend.dto.BasedOnLoggedInUserRequest;
 import com.squadfind.backend.dto.FindAllUsersWithCriteriaRequest;
 import com.squadfind.backend.model.User;
 import com.squadfind.backend.service.DiscoverService;
-import com.squadfind.backend.service.UserGameService;
-import com.squadfind.backend.service.UserPlatformService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +13,9 @@ import java.util.Set;
 @RequestMapping("/api/discover")
 public class DiscoverController {
     private final DiscoverService discoverService;
-    private final UserGameService userGameService;
-    private final UserPlatformService userPlatformService;
 
-    public DiscoverController(DiscoverService discoverService, UserGameService userGameService, UserPlatformService userPlatformService) {
+    public DiscoverController(DiscoverService discoverService) {
         this.discoverService = discoverService;
-        this.userGameService = userGameService;
-        this.userPlatformService = userPlatformService;
     }
 
     @PostMapping
