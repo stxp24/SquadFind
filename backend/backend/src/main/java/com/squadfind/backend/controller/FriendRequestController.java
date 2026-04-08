@@ -3,7 +3,6 @@ package com.squadfind.backend.controller;
 import com.squadfind.backend.dto.CreateFriendRequestRequest;
 import com.squadfind.backend.model.FriendRequest;
 import com.squadfind.backend.service.FriendRequestService;
-import com.squadfind.backend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import java.util.List;
 public class FriendRequestController {
     private final FriendRequestService friendRequestService;
 
-    public FriendRequestController(UserService userService, FriendRequestService friendRequestService) {
+    public FriendRequestController(FriendRequestService friendRequestService) {
         this.friendRequestService = friendRequestService;
     }
 

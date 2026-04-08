@@ -1,10 +1,7 @@
 package com.squadfind.backend.controller;
 
 
-import com.squadfind.backend.dto.CreateUserGameRequest;
-import com.squadfind.backend.dto.CreateUserPlatformRequest;
-import com.squadfind.backend.dto.UserGameUpdateRequest;
-import com.squadfind.backend.dto.UserUpdateRequest;
+import com.squadfind.backend.dto.*;
 import com.squadfind.backend.model.User;
 import com.squadfind.backend.model.UserGame;
 import com.squadfind.backend.model.UserPlatform;
@@ -82,6 +79,13 @@ public class UserController {
     public ResponseEntity<List<UserPlatform>> getUserPlatforms(@PathVariable Long id){
         List<UserPlatform> userPlatforms = userPlatformService.getUserPlatforms(id);
         return ResponseEntity.ok(userPlatforms);
+    }
+
+    // Endpoint for updating user platforms
+    @PutMapping("/{id}/platforms")
+    public ResponseEntity<UserPlatform> updateUserPlatforms(@PathVariable Long id, @RequestBody UpdateUserPlatformRequest request){
+        UserPlatform userPlatform = userPlatformService.updateUserPlatform(id, request);
+        return ResponseEntity.ok(userPlatform);
     }
 
     /*----- USER GAME ENDPOINTS -----*/

@@ -7,7 +7,7 @@ import com.squadfind.backend.repo.GameRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/* =====NOTE===== These exist as admin functions, so new games can be added, deleted, and updated. Users do not have access to these functions.*/
 @Service
 public class GameService {
     private final GameRepo gameRepo;

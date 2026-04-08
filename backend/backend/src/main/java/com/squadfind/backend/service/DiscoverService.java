@@ -18,30 +18,10 @@ import java.util.Set;
 public class DiscoverService {
     private final UserGameRepo userGameRepo;
     private final UserPlatformRepo userPlatformRepo;
-    private final UserRepo userRepo;
 
-    public DiscoverService(UserGameRepo userGameRepo, UserPlatformRepo userPlatformRepo, FriendRequestRepo friendRequestRepo, GameRepo gameRepo, UserRepo userRepo) {
+    public DiscoverService(UserGameRepo userGameRepo, UserPlatformRepo userPlatformRepo) {
         this.userGameRepo = userGameRepo;
         this.userPlatformRepo = userPlatformRepo;
-        this.userRepo = userRepo;
-    }
-
-    // Method to show all users based on selected game, ignoring platform
-    public List<UserGame> findAllUserGames(Long gameId) {
-        List<UserGame> userGames = userGameRepo.findByGameId(gameId);
-        return userGames;
-    }
-
-    // Method to show all users based on selected platform, ignoring games
-    public List<UserPlatform> findAllUserPlatforms(Platform platform) {
-        List<UserPlatform> userPlatforms = userPlatformRepo.findByPlatform(platform);
-        return userPlatforms;
-    }
-
-    // Method to find all users on a given game and platform
-    public List<User> findAllUsers() {
-        List<User> users = userRepo.findAll();
-        return users;
     }
 
     // Method to find users based on custom criteria
