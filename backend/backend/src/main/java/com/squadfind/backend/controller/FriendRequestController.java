@@ -40,11 +40,25 @@ public class FriendRequestController {
         return ResponseEntity.noContent().build();
     }
 
-    // Endpoint to view incoming and outgoing friend requests
+    // Endpoint to view accepted friends
     @GetMapping
-    public ResponseEntity<List<FriendRequest>> getFriendRequests(@RequestParam Long userId) {
+    public ResponseEntity<List<FriendRequest>> getFriends(@RequestParam Long userId) {
         List<FriendRequest> friends = friendRequestService.getFriends(userId);
         return ResponseEntity.ok(friends);
+    }
+
+    // Endpoint to view pending incoming friend requests
+    @GetMapping("/request/incoming")
+    public ResponseEntity<List<FriendRequest>> getIncomingRequests(@RequestParam Long userId) {
+        List<FriendRequest> incoming = friendRequestService.getIncomingRequests(userId);
+        return ResponseEntity.ok(incoming);
+    }
+
+    // Endpoint to view pending outgoing friend requests
+    @GetMapping("/request/outgoing")
+    public ResponseEntity<List<FriendRequest>> getOutgoingRequests(@RequestParam Long userId){
+        List<FriendRequest> outgoing = friendRequestService.getOutgoingRequests(userId);
+        return ResponseEntity.ok(outgoing);
     }
 
     // Endpoint for deleting a friend request
