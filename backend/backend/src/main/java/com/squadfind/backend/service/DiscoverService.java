@@ -130,16 +130,16 @@ public class DiscoverService {
         Set<User> users = new HashSet<>();
         Set<User> platformUsers = new HashSet<>();
         Long gameId = request.getGameId();
-        Long platformId = request.getPlatformId();
+        Platform platform = request.getPlatform();
 
         List<UserGame> userGames = userGameRepo.findByGameId(gameId);
-        List<UserPlatform> userPlatforms = userPlatformRepo.findByPlatformId(platformId);
+        List<UserPlatform> userPlatforms = userPlatformRepo.findByPlatform(platform);
 
         for (UserGame userGame : userGames){
             users.add(userGame.getUser());
         }
         for (UserPlatform userPlatform : userPlatforms){
-            users.add(userPlatform.getUser());
+            platformUsers.add(userPlatform.getUser());
         }
         users.retainAll(platformUsers); // Retain only users that are on both platforms and games
         users.removeIf(user -> user.getId().equals(userId)); // Exclude logged in user

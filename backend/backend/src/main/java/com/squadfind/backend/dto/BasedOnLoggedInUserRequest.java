@@ -1,5 +1,6 @@
 package com.squadfind.backend.dto;
 
+import com.squadfind.backend.enums.Platform;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,5 +8,5 @@ import lombok.Setter;
 @Setter
 public class BasedOnLoggedInUserRequest {
     Long gameId;
-    Long platformId;
+    Platform platform;
 }

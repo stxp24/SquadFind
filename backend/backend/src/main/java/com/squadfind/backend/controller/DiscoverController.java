@@ -24,7 +24,7 @@ public class DiscoverController {
         this.userPlatformService = userPlatformService;
     }
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<Set<User>> basedOnLoggedInUser(@RequestParam Long userId, @RequestBody BasedOnLoggedInUserRequest request){
         Set<User> users = discoverService.basedOnLoggedInUser(userId, request);
         return ResponseEntity.ok(users);
