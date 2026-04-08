@@ -75,4 +75,12 @@ public class FriendRequestService {
                 .filter(fr -> fr.getStatus() == Status.ACCEPTED)
                 .toList();
     }
+
+    public List<FriendRequest> getIncomingRequests(Long userId) {
+        return friendRequestRepo.findByReceiverIdAndStatus(userId, Status.PENDING);
+    }
+
+    public List<FriendRequest> getOutgoingRequests(Long userId) {
+        return friendRequestRepo.findBySenderIdAndStatus(userId, Status.PENDING);
+    }
 }

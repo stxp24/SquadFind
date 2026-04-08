@@ -66,14 +66,14 @@ public class UserController {
     // Endpoint for deleting a user platform
     @DeleteMapping("/{id}/platforms/{platformId}")
     public ResponseEntity<Void> deleteUserPlatform(@PathVariable("id") Long userId, @PathVariable("platformId") Long platformId) {
-        userPlatformService.deleteUserPlatform(platformId);
+        userPlatformService.deleteUserPlatform(userId, platformId);
         return ResponseEntity.noContent().build();
     }
 
     // Endpoint for getting a user platform
     @GetMapping("/{id}/platforms/{platformId}")
     public ResponseEntity<UserPlatform> getUserPlatform(@PathVariable("id") Long userId, @PathVariable("platformId") Long platformId){
-        UserPlatform userPlatform = userPlatformService.getUserPlatform(platformId);
+        UserPlatform userPlatform = userPlatformService.getUserPlatform(userId, platformId);
         return ResponseEntity.ok(userPlatform);
     }
 
@@ -96,21 +96,21 @@ public class UserController {
     // Endpoint for deleting a user game
     @DeleteMapping("/{id}/games/{userGameId}")
     public ResponseEntity<Void> deleteUserGame(@PathVariable("id") Long userId, @PathVariable("userGameId") Long userGameId){
-        userGameService.deleteUserGame(userGameId);
+        userGameService.deleteUserGame(userId, userGameId);
         return ResponseEntity.noContent().build();
     }
 
     // Endpoint for updating a user game
     @PutMapping("/{id}/games/{userGameId}")
     public ResponseEntity<UserGame> updateUserGame(@PathVariable("id") Long userId, @PathVariable("userGameId") Long userGameId, @RequestBody UserGameUpdateRequest request){
-        UserGame userGame = userGameService.updateUserGame(userGameId, request);
+        UserGame userGame = userGameService.updateUserGame(userId, userGameId, request);
         return ResponseEntity.ok(userGame);
     }
 
     // Endpoint for getting a user game
     @GetMapping("/{id}/games/{userGameId}")
     public ResponseEntity<UserGame> getUserGame(@PathVariable("id") Long userId, @PathVariable("userGameId") Long userGameId){
-        UserGame userGame = userGameService.getUserGame(userGameId);
+        UserGame userGame = userGameService.getUserGame(userId, userGameId);
         return ResponseEntity.ok(userGame);
     }
 

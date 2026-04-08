@@ -51,13 +51,20 @@ public class UserPlatformService {
 
     }
 
-    public void deleteUserPlatform(Long userPlatformId){
+    public void deleteUserPlatform(Long userId, Long userPlatformId){
         UserPlatform userPlatform = userPlatformRepo.findById(userPlatformId).orElseThrow(() -> new RuntimeException("User not found"));
+        if (!userPlatform.getUser().getId().equals(userId)){
+            throw new RuntimeException("Platform does not belong to user");
+        }
         userPlatformRepo.delete(userPlatform);
     }
 
-    public UserPlatform getUserPlatform(Long userPlatformId){
-        return userPlatformRepo.findById(userPlatformId).orElseThrow(() -> new RuntimeException("User not found"));
+    public UserPlatform getUserPlatform(Long userId, Long userPlatformId){
+        UserPlatform userPlatform = userPlatformRepo.findById(userPlatformId).orElseThrow(() -> new RuntimeException("User not found"));
+        if (!userPlatform.getUser().getId().equals(userId)){
+            throw new RuntimeException("Platform does not belong to user");
+        }
+        return userPlatform;
     }
 
     // Get all all platforms for a user

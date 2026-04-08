@@ -47,16 +47,23 @@ public class UserGameService {
         return userGameRepo.save(userGame);
     }
 
-    public void deleteUserGame(Long userGameId){
+    public void deleteUserGame(Long userId, Long userGameId){
         // Validate
+        UserGame userGame = userGameRepo.findById(userGameId).orElseThrow(() -> new RuntimeException("Game not found in users profile"));
+        if (!userGame.getUser().getId().equals(userId)){
+            throw new RuntimeException("Game does not belong to user");
+        }
         if (!userGameRepo.existsById(userGameId)) {
             throw new RuntimeException("Game not found in users profile");
         }
         userGameRepo.deleteById(userGameId);
     }
 
-    public UserGame updateUserGame(Long userGameId, UserGameUpdateRequest request){
+    public UserGame updateUserGame(Long userId, Long userGameId, UserGameUpdateRequest request){
         UserGame userGame =  userGameRepo.findById(userGameId).orElseThrow(() -> new RuntimeException("Game not found in users profile"));
+        if (!userGame.getUser().getId().equals(userId)){
+            throw new RuntimeException("Game does not belong to user");
+        }
         // Perform validation checks and then set values
         if (request.getRole() != null){
             userGame.setRole(request.getRole());
@@ -72,8 +79,12 @@ public class UserGameService {
         return userGameRepo.save(userGame);
     }
 
-    public UserGame getUserGame(Long userGameId){
-        return userGameRepo.findById(userGameId).orElseThrow(() -> new RuntimeException("Game not found in users profile"));
+    public UserGame getUserGame(Long userId, Long userGameId){
+        UserGame userGame = userGameRepo.findById(userGameId).orElseThrow(() -> new RuntimeException("Game not found in users profile"));
+        if (!userGame.getUser().getId().equals(userId)){
+            throw new RuntimeException("Game does not belong to user");
+        }
+        return userGame;
     }
 
     public List<UserGame> getUserGamesByUserId(Long userId) {
