@@ -7,8 +7,6 @@ import com.squadfind.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

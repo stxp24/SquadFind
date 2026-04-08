@@ -1,6 +1,7 @@
 package com.squadfind.backend.service;
 
 import com.squadfind.backend.dto.FindAllUsersWithCriteriaRequest;
+import com.squadfind.backend.dto.BasedOnLoggedInUserRequest;
 import com.squadfind.backend.enums.Platform;
 import com.squadfind.backend.model.User;
 import com.squadfind.backend.model.UserGame;
@@ -8,6 +9,7 @@ import com.squadfind.backend.model.UserPlatform;
 import com.squadfind.backend.repo.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -121,6 +123,26 @@ public class DiscoverService {
         }
 
         users.removeIf(user -> user.getId().equals(userId)); // Remove the user who is viewing the results
+        return users;
+    }
+    /* gets users based on logged in users games and platforms */
+    public Set<User> basedOnLoggedInUser(Long userId, BasedOnLoggedInUserRequest request){
+        Set<User> users = new HashSet<>();
+        Set<User> platformUsers = new HashSet<>();
+        Long gameId = request.getGameId();
+        Long platformId = request.getPlatformId();
+
+        List<UserGame> userGames = userGameRepo.findByGameId(gameId);
+        List<UserPlatform> userPlatforms = userPlatformRepo.findByPlatformId(platformId);
+
+        for (UserGame userGame : userGames){
+            users.add(userGame.getUser());
+        }
+        for (UserPlatform userPlatform : userPlatforms){
+            users.add(userPlatform.getUser());
+        }
+        users.retainAll(platformUsers); // Retain only users that are on both platforms and games
+        users.removeIf(user -> user.getId().equals(userId)); // Exclude logged in user
         return users;
     }
 }

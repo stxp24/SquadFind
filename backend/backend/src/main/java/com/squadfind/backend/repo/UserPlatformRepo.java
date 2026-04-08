@@ -10,4 +10,5 @@ public interface UserPlatformRepo extends JpaRepository<UserPlatform, Long> {
     boolean existsByUserIdAndPlatform(Long userId, Platform platform);
     List<UserPlatform> findByUserId(Long userId);
     List<UserPlatform> findByPlatform(Platform platform);
+    List<UserPlatform> findByPlatformId(Long platformId);
 }
