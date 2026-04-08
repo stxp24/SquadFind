@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserPlatformRepo extends JpaRepository<UserPlatform, Long> {
     boolean existsByUserIdAndPlatform(Long userId, Platform platform);
     List<UserPlatform> findByUserId(Long userId);
+    List<UserPlatform> findByPlatform(Platform platform);
 }

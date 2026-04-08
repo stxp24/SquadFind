@@ -6,6 +6,8 @@ import com.squadfind.backend.model.Game;
 import com.squadfind.backend.repo.GameRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GameService {
     private final GameRepo gameRepo;
@@ -37,6 +39,11 @@ public class GameService {
             game.setGameName(request.getGameName());
         }
         return gameRepo.save(game);
+    }
+
+    // List all game function that frontend can call
+    public List<Game> getAllGames() {
+        return gameRepo.findAll();
     }
 
 }
